@@ -13,6 +13,17 @@ app.get('/', getHTML);
 app.get('/css', getCSS);
 app.get('/js', getJS);
 
+// include and initialize the rollbar library with your access token
+let Rollbar = require('rollbar')
+let rollbar = new Rollbar({
+  accessToken: '9c9fd64f5e544229865f2846d0a01b0e',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Robo Bros is up and running')
+
 app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
